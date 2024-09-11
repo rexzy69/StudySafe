@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SafeStudy Login</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: black;
+      color: white;
+      text-align: center;
+      font-family: Arial, sans-serif;
+    }
+
+    .container {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .logo {
+      width: 150px;
+      height: 150px;
+      margin-bottom: 15px;
+    }
+
+    .input-container {
+      margin: 10px 0;
+    }
+
+    .input-field {
+      padding: 8px;
+      font-size: 16px;
+      width: 250px;
+      border: 2px solid #e0a700;
+      border-radius: 5px;
+      background-color: black;
+      color: white;
+      outline: none;
+    }
+
+    .input-field:focus {
+      background-color: black;
+      border-color: #d4a200;
+    }
+
+    .login-button {
+      display: inline-block;
+      padding: 8px 20px;
+      font-size: 16px;
+      color: white;
+      background-color: #d4a200;
+      text-decoration: none;
+      border-radius: 5px;
+      border: none;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    .login-button:hover {
+      background-color: #b88d00;
+    }
+
+    .message {
+      margin-top: 10px;
+      font-size: 18px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <!-- Replace the placeholder data URL with your actual Data URL -->
+    <img src="data:image/png;base64,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" alt="Lock Icon" class="logo">
+    <div class="input-container">
+      <input type="text" id="licenseKey" placeholder="Enter License Key" class="input-field">
+    </div>
+    <button class="login-button" onclick="login()">Login</button>
+    <div id="message" class="message"></div>
+  </div>
+
+  <script>
+    async function login() {
+      const key = document.getElementById('licenseKey').value;
+      const messageElement = document.getElementById('message');
+
+      try {
+        const response = await fetch('/validate-key', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ key }),
+        });
+
+        const result = await response.json();
+
+        if (result.success) {
+          messageElement.textContent = 'License Key is correct. Redirecting...';
+          messageElement.style.color = 'green';
+          // Redirect to index page
+          window.location.href = '/';
+        } else {
+          messageElement.textContent = 'Invalid License Key.';
+          messageElement.style.color = 'red';
+        }
+      } catch (error) {
+        console.error('Error:', error);
+        messageElement.textContent = 'An error occurred. Please try again.';
+        messageElement.style.color = 'red';
+      }
+    }
+  </script>
+</body>
+
+</html>

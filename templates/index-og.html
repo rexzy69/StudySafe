@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tracked Websites Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <aside class="sidebar">
+            <h2>Dashboard</h2>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#tracker">Tracker</a></li>
+                    <li><a href="#target">Target</a></li>
+                    <li><a href="#settings">Settings</a></li>
+                </ul>
+            </nav>
+        </aside>
+        <main class="main-content">
+            <section id="home">
+                <h1>Home</h1>
+                <div class="overview">
+                    <h2>Welcome to the Tracker Dashboard</h2>
+                    <p>Here you can manage and view the websites you have visited. The Tracker will help you keep track of your browsing history.</p>
+                </div>
+                <div class="instructions">
+                    <h2>How to Use</h2>
+                    <p>To start tracking websites, simply visit the target site. The Tracker will automatically begin logging your browsing activity. Navigate to the Tracker section to see the websites you have visited.</p>
+                </div>
+            </section>
+            <section id="tracker" style="display:none;">
+                <h1>Tracker</h1>
+                <ul id="website-list"></ul>
+            </section>
+            <section id="target" style="display:none;">
+                <h1>Target</h1>
+                <form id="target-form" class="target-form">
+                    <input type="text" id="target-url" placeholder="Enter URL to add" required>
+                    <button type="submit">Add Target</button>
+                </form>
+                <ul id="target-list"></ul>
+            </section>
+        </main>
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Fetch and display tracked websites in the Tracker section
+            fetch('/getTrackedWebsites')
+                .then(response => response.json())
+                .then(data => {
+                    const websiteList = document.getElementById('website-list');
+                    websiteList.innerHTML = ''; // Clear the list before adding new items
+                    if (data.length === 0) {
+                        const noDataMessage = document.createElement('li');
+                        noDataMessage.textContent = 'No websites tracked yet.';
+                        websiteList.appendChild(noDataMessage);
+                    } else {
+                        data.forEach(website => {
+                            const listItem = document.createElement('li');
+                            const link = document.createElement('a');
+                            link.href = website;
+                            link.textContent = website;
+                            link.target = '_blank';
+                            listItem.appendChild(link);
+                            websiteList.appendChild(listItem);
+                        });
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching tracked websites:', error);
+                });
+
+            // Fetch and display target URLs in the Target section
+            fetch('/getTargets')
+                .then(response => response.json())
+                .then(data => {
+                    const targetList = document.getElementById('target-list');
+                    targetList.innerHTML = ''; // Clear the list before adding new items
+                    if (data.length === 0) {
+                        const noDataMessage = document.createElement('li');
+                        noDataMessage.textContent = 'No targets added yet.';
+                        targetList.appendChild(noDataMessage);
+                    } else {
+                        data.forEach(target => {
+                            const listItem = document.createElement('li');
+                            listItem.textContent = target;
+                            targetList.appendChild(listItem);
+                        });
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching target URLs:', error);
+                });
+
+            // Handle form submission for adding target URLs
+            document.getElementById('target-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                const url = document.getElementById('target-url').value;
+                fetch('/addTarget', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ url: url })
+                })
+                .then(response => response.json())
+                .then(() => {
+                    document.getElementById('target-url').value = ''; // Clear the input field
+                    // Update the target list
+                    fetch('/getTargets')
+                        .then(response => response.json())
+                        .then(data => {
+                            const targetList = document.getElementById('target-list');
+                            targetList.innerHTML = ''; // Clear the list before adding new items
+                            if (data.length === 0) {
+                                const noDataMessage = document.createElement('li');
+                                noDataMessage.textContent = 'No targets added yet.';
+                                targetList.appendChild(noDataMessage);
+                            } else {
+                                data.forEach(target => {
+                                    const listItem = document.createElement('li');
+                                    listItem.textContent = target;
+                                    targetList.appendChild(listItem);
+                                });
+                            }
+                        });
+                })
+                .catch(error => {
+                    console.error('Error adding target:', error);
+                });
+            });
+        });
+
+        // Toggle sections based on navigation clicks
+        document.querySelectorAll('.sidebar nav a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').substring(1);
+                document.querySelectorAll('.main-content > section').forEach(section => {
+                    section.style.display = 'none';
+                });
+                document.getElementById(targetId).style.display = 'block';
+            });
+        });
+    </script>
+</body>
+</html>

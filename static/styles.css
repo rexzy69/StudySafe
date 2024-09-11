@@ -1,0 +1,185 @@
+/* General Styles */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #1e1e1e; /* Dark background */
+    color: #f0f0f0; /* Light text color */
+}
+
+.container {
+    display: flex;
+    height: 100vh;
+    overflow: hidden; /* Prevent overflow issues */
+}
+
+.sidebar {
+    width: 250px;
+    background-color: #2c2c2c; /* Dark sidebar */
+    padding: 20px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.3);
+    position: fixed;
+    height: 100%;
+    overflow-y: auto; /* Scroll if content overflows */
+}
+
+.sidebar h2 {
+    margin-top: 0;
+    color: #e0a700; /* Yellowish-orange header color */
+}
+
+.sidebar nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar nav ul li {
+    margin: 15px 0;
+}
+
+.sidebar nav ul li a {
+    color: #f0f0f0;
+    text-decoration: none;
+    font-size: 18px;
+    display: block;
+    padding: 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.sidebar nav ul li a:hover {
+    background-color: #e0a700; /* Hover color */
+    color: #1e1e1e; /* Dark text color on hover */
+}
+
+.main-content {
+    margin-left: 300px; /* Adjust for sidebar width and additional 50px */
+    padding: 20px;
+    flex: 1;
+    background-color: #1e1e1e;
+    overflow-y: auto; /* Allow scrolling if content overflows */
+}
+
+/* General Section Styling */
+section {
+    margin-bottom: 20px;
+    padding-right: 50px; /* Ensure right padding for space */
+}
+
+/* ScreenView Styles */
+.screenview-container {
+    display: grid;
+    grid-template-columns: repeat(4, 150px);
+    grid-gap: 10px;
+    margin: 0 auto;
+}
+
+.screenview-container div {
+    width: 150px;
+    height: 150px;
+    border: 2px solid #e0a700; /* Stroke color */
+    background-color: #333; /* Dark background inside the box */
+}
+
+/* Target Form Styles */
+.target-form {
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center; /* Align items vertically centered */
+}
+
+.target-form label {
+    margin-right: 10px;
+    color: #f0f0f0; /* Light text color */
+}
+
+.target-form input {
+    padding: 8px;
+    border: 2px solid #e0a700; /* Outline with theme color */
+    border-radius: 5px; /* Slightly rounded corners */
+    margin-right: 10px;
+    background-color: #333;
+    color: #f0f0f0;
+    font-size: 14px; /* Slightly smaller text */
+    width: 875px; /* Fixed width */
+    height: 20px; /* Reduced height */
+    outline: none; /* Remove default outline */
+}
+
+.target-form button {
+    padding: 8px;
+    background-color: #e0a700; /* Fill with theme color */
+    border: none;
+    color: #1e1e1e;
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-size: 14px; /* Matching text size */
+    width: 84.75px; /* Fixed width */
+    height: 31px; /* Fixed height */
+    outline: none; /* Remove default outline */
+}
+
+.target-form button:hover {
+    background-color: #e0a700; /* Darker yellowish-orange */
+}
+
+/* Block Form Styles */
+.block-form {
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center; /* Align items vertically centered */
+}
+
+.block-form label {
+    margin-right: 10px;
+    color: #f0f0f0; /* Light text color */
+}
+
+.block-form input {
+    padding: 8px;
+    border: 2px solid #e0a700; /* Outline with theme color */
+    border-radius: 5px; /* Slightly rounded corners */
+    margin-right: 10px;
+    background-color: #333;
+    color: #f0f0f0;
+    font-size: 14px; /* Slightly smaller text */
+    width: 875px; /* Fixed width */
+    height: 20px; /* Reduced height */
+    outline: none; /* Remove default outline */
+}
+
+.block-form button {
+    padding: 8px;
+    background-color: #e0a700; /* Fill with theme color */
+    border: none;
+    color: #1e1e1e;
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-size: 14px; /* Matching text size */
+    width: 84.75px; /* Fixed width */
+    height: 31px; /* Fixed height */
+    outline: none; /* Remove default outline */
+}
+
+.block-form button:hover {
+    background-color: #e0a700; /* Darker yellowish-orange */
+}
+
+/* List styles */
+ul {
+    padding-left: 20px;
+}
+
+li {
+    margin-bottom: 10px;
+}
+
+a {
+    color: #e0a700;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
